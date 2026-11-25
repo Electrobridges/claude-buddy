@@ -13,6 +13,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Electrobridges/claude-buddy/actions/workflows/tests.yml"><img src="https://github.com/Electrobridges/claude-buddy/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
   <img src="https://img.shields.io/badge/version-0.2.0-D97757" alt="version 0.2.0">
   <img src="https://img.shields.io/badge/license-MIT-2F6FEB" alt="MIT license">
   <img src="https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white" alt="Python 3.12+">
