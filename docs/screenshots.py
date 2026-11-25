@@ -149,6 +149,82 @@ def pet_scene() -> None:
     save(img, "modo-mascota.png")
 
 
+def logo() -> None:
+    save(render(sprites.frame("idle", 0), "terracotta", 128).toImage(), "logo.png")
+
+
+def _save_gif(frames: list[QImage], name: str, ms: int) -> None:
+    """Qt has no GIF writer: hand the frames to Pillow (dev dependency)."""
+    from PIL import Image
+    pil = []
+    for img in frames:
+        img = img.convertToFormat(QImage.Format.Format_RGBA8888)
+        raw = bytes(img.constBits())[: img.sizeInBytes()]
+        rgba = Image.frombuffer("RGBA", (img.width(), img.height()), raw, "raw", "RGBA", img.bytesPerLine(), 1)
+        pil.append(rgba.convert("RGB").quantize(colors=64, method=Image.Quantize.MEDIANCUT))
+    OUT.mkdir(parents=True, exist_ok=True)
+    pil[0].save(OUT / name, save_all=True, append_images=pil[1:], duration=ms, loop=0, optimize=True)
+    print("written", OUT / name, f"({(OUT / name).stat().st_size // 1024} KB)")
+
+
+def states_gif() -> None:
+    """Six buddies animating different activities side by side."""
+    states = ["thinking", "reading", "writing", "searching", "running", "done"]
+    cell, label_h, step = 112, 28, 60
+    frames = []
+    for k in range(80):                                   # 80 frames x 60 ms ≈ 4.8 s loop
+        img = QImage(cell * len(states), cell + label_h, QImage.Format.Format_ARGB32)
+        img.fill(QColor("#F6F3EE"))
+        p = QPainter(img)
+        p.setFont(QFont("Segoe UI", 10))
+        for i, state in enumerate(states):
+            spec = sprites.STATES[state]
+            index = (k * step) // spec.interval_ms
+            p.drawPixmap(i * cell + 8, 4, render(sprites.frame(state, index), "terracotta", 96))
+            p.setPen(QColor("#5B5750"))
+            p.drawText(QRect(i * cell, cell - 6, cell, label_h), Qt.AlignmentFlag.AlignHCenter, spec.label)
+        p.end()
+        frames.append(img)
+    _save_gif(frames, "buddy-estados.gif", step)
+
+
+def pet_gif() -> None:
+    """Scripted pet-mode scene on a mock taskbar: walk, poop, walk away, cuddle, eat, sleep."""
+    from PySide6.QtGui import QTransform
+    w, h, bar, size, step = 720, 210, 40, 96, 80
+    floor = h - bar
+    timeline = ([("walk", 1)] * 22 + [("poop", 0)] * 30 + [("walk", 1)] * 18 + [("pet", 0)] * 26
+                + [("eat", 0)] * 26 + [("yawn", 0)] * 12 + [("asleep", 0)] * 24)
+    x, poop_x, frames, since = 30.0, None, [], {}
+    for k, (state, direction) in enumerate(timeline):
+        since[state] = since.get(state, k) if timeline[k - 1][0] == state and k else k
+        local = k - since[state]
+        index = (local * step) // sprites.STATES[state].interval_ms
+        if state == "walk":
+            x += direction * 7
+        if state == "poop" and local == 28:
+            poop_x = x - 30                               # left behind the pet
+        img = QImage(w, h, QImage.Format.Format_ARGB32)
+        p = QPainter(img)
+        sky = QLinearGradient(0, 0, 0, h)
+        sky.setColorAt(0, QColor("#9CC7DD"))
+        sky.setColorAt(1, QColor("#D7E8EF"))
+        p.fillRect(0, 0, w, h, sky)
+        p.fillRect(0, floor, w, bar, QColor("#1F2A33"))
+        if poop_x is not None:
+            p.drawPixmap(round(poop_x), floor - 15 * 48 // 16, render(sprites.poop_frame(k // 6), "terracotta", 48))
+        pm = render(sprites.frame(state, index), "terracotta", size)
+        if direction < 0:
+            pm = pm.transformed(QTransform().scale(-1, 1))
+        p.drawPixmap(round(x), floor - 15 * size // 16, pm)
+        p.setPen(QColor("#E8E2D8"))
+        p.setFont(QFont("Segoe UI", 10))
+        p.drawText(QRect(0, floor, w, bar), Qt.AlignmentFlag.AlignCenter, sprites.STATES[state].label)
+        p.end()
+        frames.append(img)
+    _save_gif(frames, "modo-mascota.gif", step)
+
+
 def main() -> None:
     QApplication.setOrganizationName("ClaudeBuddyScreens")
     QApplication.setApplicationName("ClaudeBuddyScreens")
@@ -159,6 +235,9 @@ def main() -> None:
     panel_shots(app)
     states_sheet()
     pet_scene()
+    logo()
+    states_gif()
+    pet_gif()
 
 
 if __name__ == "__main__":

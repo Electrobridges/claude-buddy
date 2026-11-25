@@ -19,6 +19,7 @@ claude-buddy = "claude_buddy.app:main"    # no console window on Windows
 
 [dependency-groups]
 dev = [
+    "pillow>=13.0.0",
     "pyinstaller>=6.22.3",
     "pytest>=8",
 ]
