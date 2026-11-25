@@ -1,5 +1,7 @@
 # Formato de las sesiones de Claude Code (`~/.claude/projects`)
 
+[English](jsonl-format.md) · **Español**
+
 Documentado inspeccionando 39 sesiones reales (Claude Code 2.1.331, noviembre de 2026).
 Formato **no oficial**: puede cambiar entre versiones, así que el parser debe tolerar
 tipos y campos desconocidos.

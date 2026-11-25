@@ -1,173 +1,178 @@
 # Claude Buddy
 
-**Una mascota de escritorio que reúne todas tus sesiones locales de Claude Code y te deja retomarlas desde un panel flotante.**
+**English** · [Español](README.es.md)
 
-Claude Buddy vive en la bandeja del sistema y como un pequeño personaje pixel-art sobre tu escritorio.
-Haz clic en él y verás todas tus conversaciones de Claude Code (CLI, extensión de VS Code y app de
-escritorio) agrupadas por proyecto: puedes buscarlas, leer su historial, seguir chateando con ellas
-o abrirlas en una terminal. Mientras tanto, el buddy refleja lo que está haciendo Claude… y, si lo
-dejas, también tiene vida propia.
+**A desktop pet that brings together all your local Claude Code sessions and lets you resume them from a floating panel.**
+
+Claude Buddy lives in your system tray and as a tiny pixel-art character on your desktop.
+Click it to see all your Claude Code conversations (CLI, VS Code extension, and desktop
+app) grouped by project: you can search them, read their history, keep chatting in them,
+or open them in a terminal. Meanwhile, the buddy mirrors what Claude is doing… and, if you
+let it, it has a life of its own too.
 
 <p align="center">
-  <img src="docs/img/panel-sesiones.png" width="360" alt="Panel con las sesiones agrupadas por proyecto">
+  <img src="docs/img/panel-sesiones.png" width="360" alt="Panel showing sessions grouped by project">
   &nbsp;
-  <img src="docs/img/panel-historial.png" width="360" alt="Historial de una sesión con la caja de chat">
+  <img src="docs/img/panel-historial.png" width="360" alt="Session history with the chat box">
 </p>
 
 <p align="center">
-  <img src="docs/img/buddy-estados.png" width="720" alt="Animaciones del buddy">
+  <img src="docs/img/buddy-estados.png" width="720" alt="Buddy animations">
 </p>
 
-> Proyecto **no oficial** de la comunidad, sin relación con Anthropic. «Claude» y «Claude Code»
-> son marcas de Anthropic. El personaje es un diseño propio de este proyecto.
+> **Unofficial** community project, not affiliated with Anthropic. “Claude” and “Claude Code”
+> are trademarks of Anthropic. The character is an original design created for this project.
 
-## Características
+> The user interface is currently in **Spanish**. UI labels are quoted below in Spanish with
+> their English meaning.
 
-- **Todas tus sesiones en un sitio**: lee `~/.claude/projects` y muestra título (tu primer mensaje),
-  proyecto, última actividad, número de mensajes y origen (CLI, VS Code, Desktop).
-- **Búsqueda** por título, proyecto, ruta o ID, sin distinguir mayúsculas ni acentos.
-- **Historial** con formato (Markdown, tablas, código), herramientas usadas y errores; se
-  actualiza solo si la sesión sigue activa en otro sitio.
-- **Chat** para continuar cualquier sesión con [`claude-agent-sdk`](https://pypi.org/project/claude-agent-sdk/):
-  respuesta en streaming, mismo directorio del proyecto y avisos de permiso (*Permitir / Denegar*)
-  como en la terminal.
-- **Abrir en terminal**: ejecuta `claude --resume <id>` en la carpeta del proyecto
+## Features
+
+- **All your sessions in one place**: reads `~/.claude/projects` and displays the title (your first message),
+  project, last activity, message count, and source (CLI, VS Code, Desktop).
+- **Search** by title, project, path, or ID, case- and accent-insensitively.
+- **Formatted history** (Markdown, tables, code), tools used, and errors; automatically
+  updates if the session is still active elsewhere.
+- **Chat** to continue any session with [`claude-agent-sdk`](https://pypi.org/project/claude-agent-sdk/):
+  streaming responses, the same project directory, and permission prompts (*Permitir* / *Denegar*: Allow / Deny)
+  just like in the terminal.
+- **Open in terminal**: runs `claude --resume <id>` in the project folder
   (Windows Terminal / PowerShell, Terminal.app, gnome-terminal, konsole, xterm…).
-- **Un buddy que reacciona**: piensa, lee, busca, ejecuta comandos, escribe, te pide permiso,
-  celebra cuando termina, se duerme si no hay actividad. 6 colores y 5 accesorios.
-- **Modo mascota** (opcional): camina por la barra de tareas, cae con gravedad si lo sueltas,
-  persigue el ratón, come, hace caca, duerme, le gustan los mimos y se enfada si lo agitas.
-- **100 % local**: sin servidores propios, sin telemetría, sin guardar credenciales (usa la sesión
-  que ya tiene Claude Code).
+- **A buddy that reacts**: thinks, reads, searches, runs commands, writes, asks you for permission,
+  celebrates when done, and falls asleep when idle. 6 colors and 5 accessories.
+- **Pet mode** (*Modo mascota*, optional): walks along the taskbar, falls with gravity if you drop it,
+  chases the mouse, eats, poops, sleeps, loves being petted, and gets angry if you shake it.
+- **100% local**: no custom servers, no telemetry, no stored credentials (uses the session
+  Claude Code already has).
 
-## Modo mascota
+## Pet Mode
 
 <p align="center">
-  <img src="docs/img/modo-mascota.png" width="720" alt="El buddy caminando, una caca, mimos, mareado, comiendo y durmiendo">
+  <img src="docs/img/modo-mascota.png" width="720" alt="The buddy walking, a poop, petting, dizzy, eating, and sleeping">
 </p>
 
-Actívalo con clic derecho en el buddy → **Modo mascota**. Inspirado en clásicos como eSheep,
-Shimeji, oneko o Desktop Goose.
+Enable it by right-clicking the buddy → **Modo mascota**. Inspired by classics like eSheep,
+Shimeji, oneko, and Desktop Goose.
 
-| Qué haces | Qué pasa |
+| What you do | What happens |
 |---|---|
-| Nada | Pasea por la barra de tareas, mira a los lados, bosteza, a veces persigue el ratón |
-| Lo arrastras y lo sueltas en el aire | Cae con gravedad; si la caída es fuerte, «¡Ay!» |
-| Mueves el ratón de lado a lado encima | **Mimos**: corazones y sube su felicidad |
-| Lo agitas mientras lo arrastras | Se **marea** y después se **enfada** un rato (no quiere mimos) |
-| Menú → *Mascota → Dar de comer* | Come una galleta… y al rato **hace caca** |
-| Clic en una caca | La limpias (le gusta que su sitio esté limpio) |
-| Lo dejas mucho rato | Se cansa y **duerme**; si tiene hambre o se aburre, se pone **triste** |
+| Nothing | Strolls along the taskbar, looks around, yawns, and occasionally chases the mouse |
+| Drag and drop it in mid-air | Falls with gravity; if the fall is hard, “¡Ay!” (Ouch!) |
+| Move the mouse back and forth over it | **Petting**: hearts appear and its happiness goes up |
+| Shake it while dragging | Gets **dizzy** and then **angry** for a while (refuses petting) |
+| Menu → *Mascota → Dar de comer* (Pet → Feed) | Eats a cookie… and after a while **poops** |
+| Click on a poop | Cleans it up (it likes having a clean space) |
+| Leave it alone for a long time | Gets tired and **sleeps**; if hungry or bored, gets **sad** |
 
-Tiene **hambre, felicidad y energía**, que se guardan al cerrar (y avanzan, con límite, mientras
-la app está cerrada). Pasa el ratón por encima para verlas. Si chateas con Claude desde el panel,
-la mascota se queda quieta y muestra lo que está haciendo Claude.
+It has **hunger, happiness, and energy** levels, which are saved on exit (and keep changing, up to a limit,
+while the app is closed). Hover over it to see them. If you chat with Claude from the panel,
+the pet stays still and shows what Claude is doing.
 
-## Instalación
+## Installation
 
-### Windows (instalador)
+### Windows (installer)
 
-Descarga `ClaudeBuddy-Setup-<versión>.exe` de [Releases](../../releases) y ejecútalo. No necesita
-permisos de administrador: se instala para tu usuario, con acceso en el menú Inicio y opción de
-**iniciar con Windows**. Se desinstala desde *Configuración → Aplicaciones*.
+Download `ClaudeBuddy-Setup-<version>.exe` from [Releases](../../releases) and run it. No
+administrator privileges required: it installs for your user, with a Start menu shortcut and an option to
+**start with Windows**. Uninstall it from *Settings → Apps*.
 
-### Desde el código (Windows, Linux, macOS)
+### From source (Windows, Linux, macOS)
 
-Requisitos: Python 3.12+ y [uv](https://docs.astral.sh/uv/).
+Requirements: Python 3.12+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone <url-del-repositorio>
+git clone <repository-url>
 cd claude-buddy
 uv sync
-uv run claude-buddy              # app de bandeja
-uv run python -m claude_buddy    # igual, con consola para ver errores
-uv run claude-buddy-list         # listado de sesiones en la terminal
+uv run claude-buddy              # tray app
+uv run python -m claude_buddy    # same, with a console to see errors
+uv run claude-buddy-list         # list sessions in the terminal
 ```
 
-### Requisitos para chatear
+### Requirements for chatting
 
-[Claude Code](https://code.claude.com/docs) instalado y con la sesión iniciada
-(comando `claude`). Sin él, Claude Buddy lista las sesiones y muestra su historial, pero no puede
-continuar conversaciones.
+[Claude Code](https://code.claude.com/docs) installed and signed in
+(`claude` command). Without it, Claude Buddy can list sessions and show their history, but cannot
+continue conversations.
 
-## Uso
+## Usage
 
-- **Clic** en el buddy o en el icono de la bandeja: abre o cierra el panel. **Clic derecho**: menú
-  (color, accesorio, tamaño, ocultar mascota, modo mascota, salir).
-- **Doble clic** (o `Intro`) en una sesión: historial. `Esc` o `←` vuelve a la lista.
-- **Chat**: escribe abajo; `Intro` envía, `Mayús+Intro` salto de línea, `■` detiene.
-  El selector inferior elige el modo de permisos: *Preguntar*, *Aceptar ediciones* o *Solo planificar*.
-- **Abrir en terminal**: botón `>_` del historial o clic derecho en una sesión.
-- Atajos: `Ctrl+F` buscar, `↓` pasar a la lista, `F5` actualizar.
-- 📌 mantiene el panel abierto; se arrastra por la cabecera y se redimensiona desde la esquina.
+- **Click** the buddy or the tray icon: opens or closes the panel. **Right-click**: menu
+  (color, accessory, size, hide pet, pet mode, quit).
+- **Double-click** (or `Enter`) on a session: opens history. `Esc` or `←` goes back to the list.
+- **Chat**: type at the bottom; `Enter` sends, `Shift+Enter` adds a newline, `■` stops.
+  The bottom selector chooses the permission mode: *Preguntar* (Ask), *Aceptar ediciones* (Accept edits), or *Solo planificar* (Plan only).
+- **Open in terminal**: `>_` button in the history view or right-click on a session.
+- Shortcuts: `Ctrl+F` search, `↓` jump to list, `F5` refresh.
+- 📌 pins the panel open; drag it by the header and resize from the corner.
 
-> **Una sesión, un sitio a la vez.** Si la misma sesión está abierta en VS Code o en una terminal,
-> no escribas también desde el panel: las respuestas se mezclarían. El panel avisa si la sesión
-> ha tenido actividad reciente.
+> **One session, one place at a time.** If the same session is open in VS Code or a terminal,
+> do not write from the panel as well: responses will get mixed up. The panel warns you if the session
+> has had recent activity.
 
-### Diagnóstico
+### Diagnostics
 
-`ClaudeBuddy.exe --diagnose` (o `uv run python -m claude_buddy --diagnose`) comprueba Claude Code,
-las sesiones y la conexión del SDK **sin enviar ningún mensaje**. El registro está en
-`%LOCALAPPDATA%\ClaudeBuddy\ClaudeBuddy\logs\buddy.log` (Windows) o en la carpeta de datos de la
-aplicación de tu sistema.
+`ClaudeBuddy.exe --diagnose` (or `uv run python -m claude_buddy --diagnose`) checks Claude Code,
+sessions, and the SDK connection **without sending any messages**. Logs are stored at
+`%LOCALAPPDATA%\ClaudeBuddy\ClaudeBuddy\logs\buddy.log` (Windows) or in your system's
+application data folder.
 
-## Privacidad
+## Privacy
 
-- La app **solo lee** `~/.claude` (o `CLAUDE_CONFIG_DIR`). Cuando chateas, es Claude Code quien
-  añade los mensajes a la sesión, igual que en la terminal.
-- No hay servidores propios ni telemetría. Las únicas conexiones de red son las que hace Claude
-  Code para hablar con Claude.
-- No guarda credenciales. Las preferencias (color, posición, necesidades de la mascota) se guardan
-  con `QSettings` en tu usuario.
+- The app **only reads** `~/.claude` (or `CLAUDE_CONFIG_DIR`). When you chat, Claude Code itself
+  appends messages to the session, just like in the terminal.
+- There are no custom servers or telemetry. The only network connections are those made by Claude
+  Code to talk to Claude.
+- No credentials are stored. Preferences (color, position, pet needs) are saved
+  using `QSettings` under your user profile.
 
-## Cómo funciona
+## How It Works
 
 ```
 src/claude_buddy/
-├── parser.py, scanner.py   lectura tolerante de ~/.claude/projects/*/*.jsonl (con caché)
-├── transcript.py           historial: cadena principal de la conversación, herramientas, errores
-├── chat.py                 claude-agent-sdk en un hilo con asyncio (resume, streaming, permisos)
-├── terminal.py             `claude --resume` en el terminal de cada sistema
-├── pet.py                  lógica del modo mascota (necesidades, física, gestos), sin Qt
-├── app.py                  bandeja, mascota de escritorio, panel y estados del buddy
-└── ui/                     PySide6: panel, lista, historial, chat, sprites, iconos
+├── parser.py, scanner.py   tolerant reading of ~/.claude/projects/*/*.jsonl (cached)
+├── transcript.py           history: main conversation chain, tools, errors
+├── chat.py                 claude-agent-sdk in an asyncio thread (resume, streaming, permissions)
+├── terminal.py             `claude --resume` in each system's terminal
+├── pet.py                  pet mode logic (needs, physics, gestures), without Qt
+├── app.py                  tray, desktop pet, panel, and buddy states
+└── ui/                     PySide6: panel, list, history, chat, sprites, icons
 ```
 
-El formato de los archivos de sesión no es público; está documentado a partir de sesiones reales en
-[docs/formato-jsonl.md](docs/formato-jsonl.md). Los sprites son matrices de 16×16 en
-[`ui/sprites.py`](src/claude_buddy/ui/sprites.py): añadir un estado o accesorio es editar texto.
+The session file format is not public; it is documented from real sessions in
+[docs/jsonl-format.md](docs/jsonl-format.md). Sprites are 16×16 matrices in
+[`ui/sprites.py`](src/claude_buddy/ui/sprites.py): adding a state or accessory is just editing text.
 
-## Desarrollo
+## Development
 
 ```bash
 uv sync
-uv run pytest                      # tests (datos sintéticos; nunca leen tus sesiones)
-uv run python docs/screenshots.py  # regenera las imágenes del README con datos inventados
+uv run pytest                      # tests (synthetic data; never read your sessions)
+uv run python docs/screenshots.py  # regenerate README images with mock data
 ```
 
-### Generar el instalador de Windows
+### Building the Windows installer
 
-Requiere [Inno Setup 6](https://jrsoftware.org/isinfo.php) (`winget install JRSoftware.InnoSetup --scope user`).
+Requires [Inno Setup 6](https://jrsoftware.org/isinfo.php) (`winget install JRSoftware.InnoSetup --scope user`).
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File packaging\build.ps1
 ```
 
-Pasa los tests, genera el icono, empaqueta con PyInstaller y crea
-`dist\ClaudeBuddy-Setup-<versión>.exe`. No incluye el `claude.exe` (~390 MB) que trae
-`claude-agent-sdk`: usa el Claude Code instalado por el usuario.
+This runs the tests, generates the icon, packages with PyInstaller, and creates
+`dist\ClaudeBuddy-Setup-<version>.exe`. It does not bundle the `claude.exe` (~390 MB) included with
+`claude-agent-sdk`: it uses the user's installed Claude Code.
 
-## Limitaciones conocidas
+## Known Limitations
 
-- El formato de `~/.claude` puede cambiar con nuevas versiones de Claude Code; el lector ignora lo
-  que no conoce y avisa de líneas dañadas.
-- Si Claude hace una pregunta con opciones durante el chat, desde el panel solo se puede permitir o
-  denegar, no elegir la opción.
-- El coste que se muestra al terminar es el estimado que informa Claude Code (equivalente en la API).
-- Probado sobre todo en Windows 11; en Linux sin bandeja del sistema el panel se abre como ventana.
+- The format of `~/.claude` may change with new versions of Claude Code; the reader ignores
+  unrecognized fields and warns about malformed lines.
+- If Claude asks a multiple-choice question during chat, the panel only lets you allow or
+  deny it, not pick an option.
+- The cost shown upon completion is the estimate reported by Claude Code (API equivalent).
+- Tested primarily on Windows 11; on Linux without a system tray, the panel opens as a regular window.
 
-## Licencia
+## License
 
-[MIT](LICENSE). El personaje y sus sprites son originales de este proyecto y se distribuyen bajo la
-misma licencia. «Claude» y «Claude Code» son marcas de Anthropic y no están cubiertas por ella.
+[MIT](LICENSE). The character and its sprites are original to this project and are distributed under the
+same license. “Claude” and “Claude Code” are trademarks of Anthropic and are not covered by it.
