@@ -102,7 +102,7 @@ option to **start with Windows**. Uninstall it from *Settings → Apps*.
 **From source** (Windows, Linux, macOS), with Python 3.12+ and [uv](https://docs.astral.sh/uv/):
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Electrobridges/claude-buddy.git
 cd claude-buddy
 uv sync
 uv run claude-buddy              # tray app

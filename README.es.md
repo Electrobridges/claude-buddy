@@ -99,7 +99,7 @@ opción de **iniciar con Windows**. Se desinstala desde *Configuración → Apli
 **Desde el código** (Windows, Linux, macOS), con Python 3.12+ y [uv](https://docs.astral.sh/uv/):
 
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/Electrobridges/claude-buddy.git
 cd claude-buddy
 uv sync
 uv run claude-buddy              # app de bandeja
