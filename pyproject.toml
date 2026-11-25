@@ -1,0 +1,31 @@
+[project]
+name = "claude-buddy"
+version = "0.2.0"
+description = "Desktop pet and tray app to browse, read and resume your local Claude Code sessions"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+dependencies = [
+    "claude-agent-sdk>=0.2.188",
+    "pyside6-essentials>=6.12",
+]
+
+[project.scripts]
+claude-buddy-list = "claude_buddy.cli:main"
+
+[project.gui-scripts]
+claude-buddy = "claude_buddy.app:main"    # no console window on Windows
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.22.3",
+    "pytest>=8",
+]
+
+[build-system]
+requires = ["uv_build>=0.8,<0.12"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
