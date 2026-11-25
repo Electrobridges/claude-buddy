@@ -6,6 +6,8 @@ ROOT = Path(SPECPATH).parent  # noqa: F821 - SPECPATH is injected by PyInstaller
 # Qt modules the app never imports (keeps the installer small)
 EXCLUDES = [
     "tkinter", "unittest", "pydoc_data",
+    "PIL",                     # dev-only (README GIFs); optional imports would drag it in
+    "pytest", "_pytest",
     "PySide6.QtQml", "PySide6.QtQuick", "PySide6.QtQuickWidgets", "PySide6.QtQuickControls2",
     "PySide6.QtPdf", "PySide6.QtPdfWidgets", "PySide6.QtSvgWidgets", "PySide6.QtOpenGL",
     "PySide6.QtOpenGLWidgets", "PySide6.QtSql", "PySide6.QtTest", "PySide6.QtXml",
